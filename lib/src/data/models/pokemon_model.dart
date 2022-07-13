@@ -4,7 +4,7 @@ import 'package:pokemon_app/src/domain/entities/pokemon.dart';
 
 PokemonModel pokemonModelFromJson(String str) =>
     PokemonModel.fromJson(json.decode(str));
-    
+
 class PokemonModel extends Pokemon {
   PokemonModel({
     required count,
@@ -22,7 +22,7 @@ class PokemonModel extends Pokemon {
       );
 }
 
-class ResultModel extends Result{
+class ResultModel extends Result {
   ResultModel({
     required name,
     required url,
@@ -32,5 +32,4 @@ class ResultModel extends Result{
         name: json["name"],
         url: json["url"],
       );
-
 }

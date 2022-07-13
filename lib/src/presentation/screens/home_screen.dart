@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokemon_cubit.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokemon_state.dart';
 import 'package:pokemon_app/src/presentation/screens/error_screen.dart';
+import 'package:pokemon_app/src/presentation/widgets/pokemon_card.dart';
 
 import '../../../injection_container.dart';
 import '../widgets/loading.dart';
@@ -27,10 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _getPokemons(context);
             } else if (state is PokemonStateLoaded) {
               final pokemons = state.pokemon.results;
-              print(pokemons.first.name);
-              return Center(
-                child: Text(pokemons.first.name),
-              );
+              return pokemonCards(pokemons);
             } else if (state is PokemonStateLoading) {
               return const LoadingIndicator();
             } else if (state is PokemonStateError) {
@@ -41,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
 void _getPokemons(BuildContext context) async {
   final pokemonCubit = context.read<PokemonCubit>();

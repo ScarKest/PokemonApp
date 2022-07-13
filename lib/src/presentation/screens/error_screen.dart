@@ -39,7 +39,6 @@ Widget tryAgainButton() {
     child: GestureDetector(
       //TODO: ingresar el metodo
       onTap: () {
-        //getPokemon();
       },
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 95, vertical: 15),
