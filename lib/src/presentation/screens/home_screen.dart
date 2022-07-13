@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app/src/domain/entities/pokemon.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokemon_cubit.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokemon_state.dart';
 import 'package:pokemon_app/src/presentation/screens/error_screen.dart';

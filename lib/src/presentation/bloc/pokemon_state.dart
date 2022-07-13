@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:pokemon_app/src/domain/entities/pokemon.dart';
 
 abstract class PokemonState {
@@ -21,9 +20,3 @@ class PokemonStateError extends PokemonState {
   PokemonStateError(this.errorMessage);
 }
 
-class paginationState with ChangeNotifier {
-  bool isLoadinbg = false;
-  int totalPage = 0;
-  int currentPage = 0;
-  List<Result> results = [];
-}
