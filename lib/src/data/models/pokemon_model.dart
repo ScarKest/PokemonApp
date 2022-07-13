@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:pokemon_app/src/domain/entity/pokemon.dart';
+import 'package:pokemon_app/src/domain/entities/pokemon.dart';
 
 PokemonModel pokemonModelFromJson(String str) =>
     PokemonModel.fromJson(json.decode(str));

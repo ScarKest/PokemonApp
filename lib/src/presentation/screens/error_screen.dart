@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app/src/data/datasources/remote_datasource.dart';
 
 class ErrorScreen extends StatefulWidget {
   const ErrorScreen({Key? key}) : super(key: key);
@@ -38,7 +39,9 @@ Widget tryAgainButton() {
   return Center(
     child: GestureDetector(
       //TODO: ingresar el metodo
-      onTap: () {},
+      onTap: () {
+        //getPokemon();
+      },
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 95, vertical: 15),
           decoration: BoxDecoration(

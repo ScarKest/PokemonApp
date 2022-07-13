@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:pokemon_app/src/data/models/pokemon_model.dart';
 
 abstract class PokemonRemoteDataSource {
-  Future<PokemonModel> requestRandomBook();
+  Future<PokemonModel> getPokemon();
 }
 
 class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
@@ -11,9 +11,8 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
   PokemonRemoteDataSourceImpl(this.client);
 
   @override
-  Future<PokemonModel> requestRandomBook() async {
-    final url =
-        Uri.parse('https://pokeapi.co/api/v2/pokemon/');
+  Future<PokemonModel> getPokemon() async {
+    final url = Uri.parse('https://pokeapi.co/api/v2/pokemon/');
     final response = await client.get(url);
 
     if (response.statusCode == 200) {
