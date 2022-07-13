@@ -9,9 +9,9 @@ class PokemonCubit extends Cubit<PokemonState> {
 
   PokemonCubit(this.getPokemon) : super(PokemonStateInitial());
 
-  void getPokemons() async {
+  void getPokemons(int pages) async {
     emit(PokemonStateLoading());
-    final failureOrPokemon = await getPokemon();
+    final failureOrPokemon = await getPokemon(pages);
     emit(_failureOrPokemon(failureOrPokemon));
   }
 

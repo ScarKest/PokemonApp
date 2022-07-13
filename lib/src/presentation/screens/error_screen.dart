@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app/src/presentation/screens/home_screen.dart';
 
 class ErrorScreen extends StatefulWidget {
   const ErrorScreen({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             const SizedBox(height: 20),
             Text("please try again later...", style: textStyle),
             const SizedBox(height: 100),
-            tryAgainButton()
+            tryAgainButton(context)
           ],
         ),
       ),
@@ -34,12 +35,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
   }
 }
 
-Widget tryAgainButton() {
+Widget tryAgainButton(BuildContext context) {
   return Center(
     child: GestureDetector(
-      //TODO: ingresar el metodo
-      onTap: () {
-      },
+      onTap: () => getPokemons(context,20),
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 95, vertical: 15),
           decoration: BoxDecoration(

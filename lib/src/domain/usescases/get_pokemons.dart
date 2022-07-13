@@ -6,5 +6,5 @@ class GetPokemons {
   final PokemonRepository pokemonRepository;
 
   GetPokemons(this.pokemonRepository);
-  Future<Either<Fail, Pokemon>> call() async => pokemonRepository.getPokemons();
+  Future<Either<Fail, Pokemon>> call(int pages) async => pokemonRepository.getPokemons(pages);
 }
