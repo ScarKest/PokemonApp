@@ -38,8 +38,7 @@ Widget tryAgainButton() {
   return Center(
     child: GestureDetector(
       //TODO: ingresar el metodo
-      onTap: () {
-      },
+      onTap: () {},
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 95, vertical: 15),
           decoration: BoxDecoration(
@@ -48,7 +47,7 @@ Widget tryAgainButton() {
           ),
           child: const Text(
             "Try Again Now",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           )),
     ),
   );
