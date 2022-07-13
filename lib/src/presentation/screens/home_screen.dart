@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app/src/domain/entity/pokemon.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokemon_cubit.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokemon_state.dart';
+import 'package:pokemon_app/src/presentation/screens/error_screen.dart';
+
+import '../../../injection_container.dart';
+import '../widgets/loading.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,15 +18,32 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Pokemon App"),
-      ),
-      body: BlocProvider<Pokemon>(
-        create: (context) {},
-        child: BlocBuilder(builder: (context, state) {
-
-        }),
-      ),
+      body: BlocProvider(
+          create: (context) => sl<PokemonCubit>(),
+          child: BlocBuilder<PokemonCubit, PokemonState>(
+              builder: (context, state) {
+            if (state is PokemonStateInitial) {
+              const LoadingIndicator();
+              _getPokemons(context);
+            } else if (state is PokemonStateLoaded) {
+              final pokemons = state.pokemon.results;
+              print(pokemons.first.name);
+              return Center(
+                child: Text(pokemons.first.name),
+              );
+            } else if (state is PokemonStateLoading) {
+              return const LoadingIndicator();
+            } else if (state is PokemonStateError) {
+              return const ErrorScreen();
+            }
+            return Container();
+          })),
     );
   }
+}
+
+
+void _getPokemons(BuildContext context) async {
+  final pokemonCubit = context.read<PokemonCubit>();
+  pokemonCubit.getPokemons();
 }

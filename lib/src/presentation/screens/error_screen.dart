@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/src/data/datasources/remote_datasource.dart';
 
 class ErrorScreen extends StatefulWidget {
   const ErrorScreen({Key? key}) : super(key: key);
