@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/src/presentation/home_screen.dart';
+import 'package:pokemon_app/src/presentation/error_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:HomeScreen(),
+      home: ErrorScreen(),
+      // home:HomeScreen(),
     );
   }
 }
