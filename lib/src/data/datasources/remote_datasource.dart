@@ -13,7 +13,7 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
   @override
   Future<PokemonModel> getPokemon(int pages) async {
     final url = Uri.parse(
-        'https://pokeapi.co/api/v2/pokemon?limit=$pages&offset=$pages');
+        'https://pokeapi.co/api/v2/pokemon?limit=$pages&offset=0');
     final response = await client.get(url);
 
     if (response.statusCode == 200) {

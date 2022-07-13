@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
               getPokemons(context, pages);
             } else if (state is PokemonStateLoaded) {
               final pokemons = state.pokemon.results;
-              return PokemonsCards(pokemons, pages);
+              return PokemonsCards(pokemons, pages, state);
             } else if (state is PokemonStateLoading) {
               return const LoadingIndicator();
             } else if (state is PokemonStateError) {
