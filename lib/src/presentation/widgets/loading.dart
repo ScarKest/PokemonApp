@@ -7,12 +7,13 @@ class LoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 50),
+Expanded(child: Container()),
         SizedBox(
           height: 100,
           child: Image.asset("assets/loading.gif"),
         ),
-        const Text("Loading...")
+        const Text("Loading..."),
+        const SizedBox(height: 25,)
       ],
     );
   }

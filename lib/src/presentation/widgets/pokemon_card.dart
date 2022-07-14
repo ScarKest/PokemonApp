@@ -7,7 +7,6 @@ import 'package:pokemon_app/src/presentation/bloc/pokedex/pokedex_cubit.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokedex/pokedex_state.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokemon/pokemon_cubit.dart';
 import 'package:pokemon_app/src/presentation/bloc/pokemon/pokemon_state.dart';
-import 'package:pokemon_app/src/presentation/widgets/loading.dart';
 
 // ignore: must_be_immutable
 class PokemonsCards extends StatefulWidget {
