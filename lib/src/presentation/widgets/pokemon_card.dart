@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app/injection_container.dart';
+import 'package:pokemon_app/src/domain/entities/pokedex.dart';
 import 'package:pokemon_app/src/domain/entities/pokemon.dart';
-import 'package:pokemon_app/src/presentation/bloc/pokemon_cubit.dart';
-import 'package:pokemon_app/src/presentation/bloc/pokemon_state.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokedex/pokedex_cubit.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokedex/pokedex_state.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokemon/pokemon_cubit.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokemon/pokemon_state.dart';
+import 'package:pokemon_app/src/presentation/widgets/loading.dart';
 
 // ignore: must_be_immutable
 class PokemonsCards extends StatefulWidget {
@@ -33,16 +38,29 @@ class _PokemonsCardsState extends State<PokemonsCards> {
         controller: scrollController,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
         itemCount: widget.pokemons.length,
-        itemBuilder: (context, i) {
-          if (i == widget.pokemons.length) {
-            return Container(color: Colors.black, height: 100,width: 100,);
-          }
-          return pokemonCard(widget.pokemons[i], i + 1);
+        itemBuilder: (_, i) {
+          return pokedex(context, widget.pokemons[i], i);
         });
   }
 
-  Widget pokemonCard(Result pokemon, int index) {
-    currentPages = index;
+  Widget pokedex(BuildContext context, Result pokemon, int index) {
+    return BlocProvider(
+      create: (context) => sl<PokedexCubit>(),
+      child: BlocBuilder<PokedexCubit, PokedexState>(builder: (context, state) {
+        if (state is PokedexStateInitial) {
+          getPokemonByPokedex(context);
+        } else if (state is PokedexStateLoaded) {
+          var pokedex = state.pokedex;
+          return pokemonCard(pokemon, pokedex.pokemon[index]);
+        }
+        return Container();
+      }),
+    );
+  }
+
+  Widget pokemonCard(Result pokemon, PokemonP image) {
+    currentPages = image.id;
+    var numberPokemon = (image.nume.isEmpty) ? 001 : image.nume;
     return Container(
       padding: EdgeInsets.zero,
       margin: const EdgeInsets.symmetric(vertical: 5),
@@ -55,7 +73,13 @@ class _PokemonsCardsState extends State<PokemonsCards> {
       child: Stack(
         children: [
           Positioned(child: Image.asset("assets/pokebola.png")),
-          // Positioned(child: Container(child: Image.network("http://www.serebii.net/pokemongo/pokemon/index.png"),)),
+          Positioned(
+            top: 20,
+            left: 23,
+              child: SizedBox(
+                  height: 50,
+                  child: Image.network(
+                      "http://www.serebii.net/pokemongo/pokemon/$numberPokemon.png"))),
           Positioned(
               top: 40,
               left: 80,
@@ -70,7 +94,7 @@ class _PokemonsCardsState extends State<PokemonsCards> {
             bottom: -1,
             right: 20,
             child: Text(
-              "#$index",
+              "#${image.nume}",
               style: const TextStyle(
                   fontSize: 70,
                   color: Color.fromARGB(121, 230, 230, 230),
@@ -80,6 +104,11 @@ class _PokemonsCardsState extends State<PokemonsCards> {
         ],
       ),
     );
+  }
+
+  void getPokemonByPokedex(BuildContext context) async {
+    final pokemonCubit = context.read<PokedexCubit>();
+    pokemonCubit.getPokemonPokedex(1);
   }
 
   Future getMorePokemons() async {

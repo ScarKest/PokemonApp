@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:pokemon_app/src/domain/entities/pokemon.dart';
 import 'package:pokemon_app/src/domain/usescases/get_pokemons.dart';
-import 'package:pokemon_app/src/presentation/bloc/pokemon_state.dart';
+import 'package:pokemon_app/src/presentation/bloc/pokemon/pokemon_state.dart';
 
 class PokemonCubit extends Cubit<PokemonState> {
   final GetPokemons getPokemon;
