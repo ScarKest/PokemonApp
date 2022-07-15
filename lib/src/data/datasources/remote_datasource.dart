@@ -14,8 +14,9 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
 
   @override
   Future<PokemonModel> getPokemon(int pages) async {
-    final url = Uri.parse(
-        'https://pokeapi.co/api/v2/pokemon?limit=$pages&offset=0');
+    var start = pages + 20;
+    final url =
+        Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=$start&offset=0');
     final response = await client.get(url);
 
     if (response.statusCode == 200) {
@@ -24,9 +25,9 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
       throw Exception();
     }
   }
-  
+
   @override
-  Future<PokedexModel> getPokedex(int pages) async{
+  Future<PokedexModel> getPokedex(int pages) async {
     final url = Uri.parse(
         'https://raw.githubusercontent.com/Biuni/PokemonGo-Pokedex/master/pokedex.json');
     final response = await client.get(url);

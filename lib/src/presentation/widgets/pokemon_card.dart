@@ -59,7 +59,6 @@ class _PokemonsCardsState extends State<PokemonsCards> {
 
   Widget pokemonCard(Result pokemon, PokemonP image) {
     currentPages = image.id;
-    var numberPokemon = (image.nume.isEmpty) ? 001 : image.nume;
     return Container(
       padding: EdgeInsets.zero,
       margin: const EdgeInsets.symmetric(vertical: 5),
@@ -75,10 +74,12 @@ class _PokemonsCardsState extends State<PokemonsCards> {
           Positioned(
             top: 20,
             left: 23,
-              child: SizedBox(
-                  height: 50,
-                  child: Image.network(
-                      "http://www.serebii.net/pokemongo/pokemon/$numberPokemon.png"))),
+            child: SizedBox(
+              height: 50,
+              child: Image.network(
+                  "http://www.serebii.net/pokemongo/pokemon/${image.nume}.png"),
+            ),
+          ),
           Positioned(
               top: 40,
               left: 80,
@@ -109,18 +110,12 @@ class _PokemonsCardsState extends State<PokemonsCards> {
     final pokemonCubit = context.read<PokedexCubit>();
     pokemonCubit.getPokemonPokedex(1);
   }
-
-  Future getMorePokemons() async {
-    final pokemonCubit = context.read<PokemonCubit>();
-    pokemonCubit.getPokemons(currentPages + 20);
-    await Future.delayed(const Duration(seconds: 6));
-  }
-
   void _onScroll() {
     var maxScroll = scrollController.position.maxScrollExtent;
     var currentPosition = scrollController.position.pixels;
     if (currentPosition > maxScroll - 50) {
-      getMorePokemons();
+      final pokemonCubit = context.read<PokemonCubit>();
+      pokemonCubit.getPokemons(currentPages);
     }
   }
 }
